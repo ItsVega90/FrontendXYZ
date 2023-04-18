@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/mascota']">Mascotas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/cliente']">Clientes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/especie']">Especies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/tipoid']">TiposId</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid p-3">
+  <div class="container-fluid p-3 my-2 bg-dark text-white"
+    style="display: flex; justify-content: center; align-items: center;">
+    <h3 id="titulo">Lista de clientes</h3>
+  </div>
+</div>
+<div class="container-fluid p-3">
+  <button type="button" class="btn btn-outline-dark my-2 btn-md float-end">Ingresar cliente</button>
+  <div class="table-responsive-md">
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th style="text-align: center;">N°</th>
+          <th style="text-align: center;">DescripcionTipoId</th>
+          <th style="text-align: center;">NumeroIdentificacion</th>
+          <th style="text-align: center;">NombreCliente</th>
+          <th style="text-align: center;">Ciudad</th>
+          <th style="text-align: center;">Direccion</th>
+          <th style="text-align: center;">Telefono</th>
+          <th style="text-align: center;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="text-align:center;" *ngFor="let item of datosCli">
+          <td style="margin-top: 3%;">{{item.idc}}</td>
+          <td style="margin-top: 3%;">{{item.tipoidc.nombret}}</td>
+          <td style="margin-top: 3%;">{{item.identificacionc}}</td>
+          <td style="margin-top: 3%;">{{item.nombrec}}</td>
+          <td style="margin-top: 3%;">{{item.ciudadc}}</td>
+          <td style="margin-top: 3%;">{{item.direccionc}}</td>
+          <td style="margin-top: 3%;">{{item.telefonoc}}</td>
+          <td style="margin-top: 3%;">
+            <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
+              <button type="button" class="btn btn-outline-warning btn-sm">Actualizar</button>
+              &nbsp;
+              <button type="button" class="btn btn-outline-danger btn-sm">Borrar</button>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
