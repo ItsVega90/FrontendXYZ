@@ -64,7 +64,7 @@
               <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal"
                 data-bs-target="#myModal2" (click)="selectItem(item)">Actualizar</button>
               &nbsp;
-              <button type="button" class="btn btn-outline-danger btn-sm">Borrar</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="selectItem(item)" (click)="deleteMas()">Borrar</button>
             </div>
           </td>
         </tr>
@@ -84,11 +84,15 @@
       <div class="modal-body">
         <form [formGroup]="formMas">
           <div class="form-floating mb-3 mt-3">
+            <input type="hidden" class="form-control" id="idm" formControlName="idm">
+            <label for="idm">N°:</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="nombrem" formControlName="nombrem">
             <label for="nombrem">Nombre de la mascota:</label>
           </div>
-          <div class="form-floating mb-3 mt-3">
-            <select class="form-select" id="especiem" formControlName="especiem" (focus)="refreshEsp()">
+          <div class="form-floating mb-3 mt-3" formGroupName="especiem">
+            <select class="form-select" id="especiem" formControlName="ide" (focus)="refreshEsp()">
               <option *ngFor="let itemesp of datosEsp" [value]="itemesp.ide">{{itemesp.nombree}}</option>
             </select>
             <label for="especiem" class="form-label">Seleccione una opcion:</label>
@@ -105,8 +109,8 @@
             <input type="date" class="form-control" id="fechaentradam" formControlName="fechaentradam">
             <label for="fechaentradam">Fecha de ingreso de la mascota</label>
           </div>
-          <div class="form-floating mb-3 mt-3">
-            <select class="form-select" id="clientem" formControlName="clientem" (focus)="refreshCli()">
+          <div class="form-floating mb-3 mt-3" formGroupName="clientem">
+            <select class="form-select" id="clientem" formControlName="idc" (focus)="refreshCli()">
               <option *ngFor="let itemcli of datosCli" [value]="itemcli.idc">{{itemcli.nombrec}}</option>
             </select>
             <label for="clientem">Nombre del cliente</label>
@@ -133,11 +137,15 @@
       <div class="modal-body">
         <form [formGroup]="formMas">
           <div class="form-floating mb-3 mt-3">
+            <input type="hidden" class="form-control" id="idm" formControlName="idm">
+            <label for="idm">N°:</label>
+          </div>
+          <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="nombrem" formControlName="nombrem">
             <label for="nombrem">Nombre de la mascota:</label>
           </div>
-          <div class="form-floating mb-3 mt-3">
-            <select class="form-select" id="especiem" formControlName="especiem">
+          <div class="form-floating mb-3 mt-3" formGroupName="especiem">
+            <select class="form-select" id="especiem" formControlName="ide">
               <option *ngFor="let itemesp of datosMas" [value]="itemesp.especiem.ide">{{itemesp.especiem.nombree}}
               </option>
             </select>
@@ -155,8 +163,8 @@
             <input type="date" class="form-control" id="fechaentradam" formControlName="fechaentradam">
             <label for="fechaentradam">Fecha de ingreso de la mascota</label>
           </div>
-          <div class="form-floating mb-3 mt-3">
-            <select class="form-select" id="clientem" formControlName="clientem">
+          <div class="form-floating mb-3 mt-3" formGroupName="clientem">
+            <select class="form-select" id="clientem" formControlName="idc">
               <option *ngFor="let itemcli of datosMas" [value]="itemcli.clientem.idc">{{itemcli.clientem.nombrec}}
               </option>
             </select>
@@ -166,7 +174,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-outline-warning btn-sm">Actualizar</button>
+        <button type="submit" class="btn btn-outline-warning btn-sm" (click)="updateMas()">Actualizar</button>
       </div>
     </div>
   </div>

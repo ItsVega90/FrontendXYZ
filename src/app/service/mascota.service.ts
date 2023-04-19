@@ -20,7 +20,7 @@ export class MascotaService {
   }
 
   deleteMascota(mascota: MascotaInterface) {
-    return this.service.post<MascotaInterface>('http://localhost:8080/api/mascota/delete', mascota.idm)
+    return this.service.post<MascotaInterface>('http://localhost:8080/api/mascota/delete', mascota)
   }
 
 }

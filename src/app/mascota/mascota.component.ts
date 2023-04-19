@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { MascotaService } from '../service/mascota.service';
 import { MascotaInterface } from '../interface/mascota.interface';
@@ -21,26 +21,29 @@ export class MascotaComponent implements OnInit {
 
   datosMas: Array<MascotaInterface> = [];
   data: any;
-  formMas!: FormGroup;
+  formMas = new FormGroup({
+    'idm': new FormControl(''),
+    'nombrem': new FormControl(''),
+    'especiem': new FormGroup({
+      'ide': new FormControl('')
+    }),
+    'razam': new FormControl(''),
+    'fechanacimientom': new FormControl(''),
+    'fechaentradam': new FormControl(''),
+    'clientem': new FormGroup({
+      'idc': new FormControl('')
+    })
+  });
 
   isUpdate: boolean = false;
 
   datosCli: Array<ClienteInterface> = [];
   datosEsp: Array<EspecieInterface> = [];
 
-  constructor(private serviceMas: MascotaService, private http: HttpClient, private router: Router, private serviceCli: ClienteService, private serviceEsp: EspecieService, private formBuilder: FormBuilder) { }
+  constructor(private serviceMas: MascotaService, private http: HttpClient, private router: Router, private serviceCli: ClienteService, private serviceEsp: EspecieService) { }
 
   ngOnInit(): void {
     this.refresh();
-    this.formMas = this.formBuilder.group({
-      idm: [''],
-      nombrem: [''],
-      especiem: [''],
-      razam: [''],
-      fechanacimientom: [''],
-      fechaentradam: [''],
-      clientem: ['']
-    });
   }
 
   refresh() {
@@ -74,15 +77,32 @@ export class MascotaComponent implements OnInit {
     console.log(this.formMas.value);
   }
 
-  selectItem(item: any) {
-    this.formMas.controls['nombrem'].setValue(item.nombrem);
-    this.formMas.controls['especiem'].setValue(item.especiem.ide);
-    this.formMas.controls['razam'].setValue(item.razam);
-    this.formMas.controls['fechanacimientom'].setValue(item.fechanacimientom);
-    this.formMas.controls['fechaentradam'].setValue(item.fechaentradam);
-    this.formMas.controls['clientem'].setValue(item.clientem.idc);
+    selectItem(item: any) {
+    this.formMas.patchValue({
+      'idm': item.idm,
+      'nombrem': item.nombrem,
+      'especiem': {
+        'ide': item.especiem.ide
+      },
+      'razam': item.razam,
+      'fechanacimientom': item.fechanacimientom,
+      'fechaentradam': item.fechaentradam,
+      'clientem': {
+        'idc': item.clientem.idc
+      }
+    });
   }
 
+  deleteMas() {
+    this.serviceMas.deleteMascota(this.formMas.value).subscribe(resp => {
+      console.log(resp);
+      this.refresh();
+    }, error => {
+      console.log(error);
+    });
+    console.log(this.formMas.value);
+  }
+  
   refreshCli() {
     this.serviceCli.selectallCliente().subscribe(datos => {
       this.datosCli = datos.data
