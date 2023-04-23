@@ -18,46 +18,317 @@
 </nav>
 
 <div class="container-fluid p-3">
-  <div class="container-fluid p-3 my-2 bg-dark text-white"
-    style="display: flex; justify-content: center; align-items: center;">
+  <div
+    class="container-fluid p-3 my-2 bg-dark text-white"
+    style="display: flex; justify-content: center; align-items: center"
+  >
     <h3 id="titulo">Lista de clientes</h3>
   </div>
 </div>
 <div class="container-fluid p-3">
-  <button type="button" class="btn btn-outline-dark my-2 btn-md float-end">Ingresar cliente</button>
+  <button
+    type="button"
+    class="btn btn-outline-dark my-2 btn-md float-end"
+    data-bs-toggle="modal"
+    data-bs-target="#myModal"
+  >
+    Ingresar cliente
+  </button>
   <div class="table-responsive-md">
     <table class="table table-dark table-striped">
       <thead>
         <tr>
-          <th style="text-align: center;">N°</th>
-          <th style="text-align: center;">DescripcionTipoId</th>
-          <th style="text-align: center;">NumeroIdentificacion</th>
-          <th style="text-align: center;">NombreCliente</th>
-          <th style="text-align: center;">Ciudad</th>
-          <th style="text-align: center;">Direccion</th>
-          <th style="text-align: center;">Telefono</th>
-          <th style="text-align: center;">Acciones</th>
+          <th style="text-align: center">N°</th>
+          <th style="text-align: center">DescripcionTipoId</th>
+          <th style="text-align: center">NumeroIdentificacion</th>
+          <th style="text-align: center">NombreCliente</th>
+          <th style="text-align: center">Ciudad</th>
+          <th style="text-align: center">Direccion</th>
+          <th style="text-align: center">Telefono</th>
+          <th style="text-align: center">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="text-align:center;" *ngFor="let item of datosCli">
-          <td style="margin-top: 3%;">{{item.idc}}</td>
-          <td style="margin-top: 3%;">{{item.tipoidc.nombret}}</td>
-          <td style="margin-top: 3%;">{{item.identificacionc}}</td>
-          <td style="margin-top: 3%;">{{item.nombrec}}</td>
-          <td style="margin-top: 3%;">{{item.ciudadc}}</td>
-          <td style="margin-top: 3%;">{{item.direccionc}}</td>
-          <td style="margin-top: 3%;">{{item.telefonoc}}</td>
-          <td style="margin-top: 3%;">
-            <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
-              <button type="button" class="btn btn-outline-warning btn-sm">Actualizar</button>
+        <tr style="text-align: center" *ngFor="let item of datosCli">
+          <td style="margin-top: 3%">{{ item.idc }}</td>
+          <td style="margin-top: 3%">{{ item.tipoidc.nombret }}</td>
+          <td style="margin-top: 3%">{{ item.identificacionc }}</td>
+          <td style="margin-top: 3%">{{ item.nombrec }}</td>
+          <td style="margin-top: 3%">{{ item.ciudadc }}</td>
+          <td style="margin-top: 3%">{{ item.direccionc }}</td>
+          <td style="margin-top: 3%">{{ item.telefonoc }}</td>
+          <td style="margin-top: 3%">
+            <div
+              class="container-fluid"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <button
+                type="button"
+                class="btn btn-outline-warning btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal2"
+                (click)="selectItem(item)"
+              >
+                Actualizar
+              </button>
               &nbsp;
-              <button type="button" class="btn btn-outline-danger btn-sm">Borrar</button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="selectItem(item)"
+                (click)="deleteCli()"
+              >
+                Borrar
+              </button>
             </div>
-
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<!--Inicio del SuperModal-->
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Nuevo cliente</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formCli">
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="hidden"
+              class="form-control"
+              id="idc"
+              formControlName="idc"
+            />
+            <label for="idc">N°:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3" formGroupName="tipoidc">
+            <select
+              class="form-select"
+              id="tipoidc"
+              formControlName="idt"
+              (focus)="refreshTid()"
+            >
+              <option *ngFor="let itemtid of datosTid" [value]="itemtid.idt">
+                {{ itemtid.nombret }}
+              </option>
+            </select>
+            <label for="tipoidc" class="form-label"
+              >Seleccione una opcion:</label
+            >
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="identificacionc"
+              formControlName="identificacionc"
+            />
+            <label for="identificacionc">Identificacion del cliente:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="nombrec"
+              formControlName="nombrec"
+            />
+            <label for="nombrec">Nombre del cliente:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="ciudadc"
+              formControlName="ciudadc"
+            />
+            <label for="ciudadc">Ciudad:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="direccionc"
+              formControlName="direccionc"
+            />
+            <label for="direccionc">Direccion:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="telefonoc"
+              formControlName="telefonoc"
+            />
+            <label for="telefonoc">Telefono:</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-outline-danger btn-sm"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-outline-success btn-sm"
+          (click)="saveCli()"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Fin del SuperModal-->
+
+<!--Inicio del SuperModal-->
+<div
+  class="modal fade"
+  id="myModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Actualizar Cliente</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formCli">
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="hidden"
+              class="form-control"
+              id="idc"
+              formControlName="idc"
+            />
+            <label for="idc">N°:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3" formGroupName="tipoidc">
+            <select
+              class="form-select"
+              id="tipoidc"
+              formControlName="idt"
+              (focus)="refreshTid()"
+            >
+              <option
+                *ngFor="let itemtid of datosCli"
+                [value]="itemtid.tipoidc.idt"
+              >
+                {{ itemtid.tipoidc.nombret }}
+              </option>
+            </select>
+            <label for="tipoidc" class="form-label"
+              >Seleccione una opcion:</label
+            >
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="identificacionc"
+              formControlName="identificacionc"
+            />
+            <label for="identificacionc">Identificacion del cliente:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="nombrec"
+              formControlName="nombrec"
+            />
+            <label for="nombrec">Nombre del cliente:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="ciudadc"
+              formControlName="ciudadc"
+            />
+            <label for="ciudadc">Ciudad:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="direccionc"
+              formControlName="direccionc"
+            />
+            <label for="direccionc">Direccion:</label>
+          </div>
+
+          <div class="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              id="telefonoc"
+              formControlName="telefonoc"
+            />
+            <label for="telefonoc">Telefono:</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-outline-danger btn-sm"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-outline-success btn-sm"
+          (click)="updateCli()"
+        >
+          Actualizar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Fin del SuperModal-->

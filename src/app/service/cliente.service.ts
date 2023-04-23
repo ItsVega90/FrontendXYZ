@@ -20,7 +20,7 @@ export class ClienteService {
   }
 
   deleteCliente(cliente: ClienteInterface) {
-    return this.service.post<ClienteInterface>('http://localhost:8080/api/cliente/delete', cliente.idc)
+    return this.service.post<ClienteInterface>('http://localhost:8080/api/cliente/delete', cliente)
   }
 
 }
