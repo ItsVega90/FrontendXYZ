@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EspecieService {
-
-  constructor(private service: HttpClient) { }
+  constructor(private service: HttpClient) {}
 
   selectallEspecie(): Observable<any> {
-    return this.service.get('http://localhost:8080/api/especie/selectall')
+    return this.service.get('http://localhost:8080/api/especie/selectall');
   }
-
 }

@@ -8,32 +8,40 @@ import { EspecieComponent } from './especie/especie.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
-const routes: Routes = [{
-  path: '',
-  pathMatch: 'full',
-  redirectTo: '/home'
-}, {
-  path: 'home',
-  component: HomeComponent
-}, {
-  path: 'login',
-  component: LoginComponent
-}, {
-  path: 'mascota',
-  component: MascotaComponent
-}, {
-  path: 'especie',
-  component: EspecieComponent
-}, {
-  path: 'tipoid',
-  component: TipoidComponent
-}, {
-  path: 'cliente',
-  component: ClienteComponent
-}];
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/login',
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'mascota',
+    component: MascotaComponent,
+  },
+  {
+    path: 'especie',
+    component: EspecieComponent,
+  },
+  {
+    path: 'tipoid',
+    component: TipoidComponent,
+  },
+  {
+    path: 'cliente',
+    component: ClienteComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

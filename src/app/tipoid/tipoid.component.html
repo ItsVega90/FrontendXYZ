@@ -18,8 +18,10 @@
 </nav>
 
 <div class="container-fluid p-3">
-  <div class="container-fluid p-3 my-2 bg-dark text-white"
-    style="display: flex; justify-content: center; align-items: center;">
+  <div
+    class="container-fluid p-3 my-2 bg-dark text-white"
+    style="display: flex; justify-content: center; align-items: center"
+  >
     <h3 id="titulo">Tipos de Identificación</h3>
   </div>
 </div>
@@ -28,14 +30,14 @@
     <table class="table table-dark table-striped">
       <thead>
         <tr>
-          <th style="text-align: center;">N°</th>
-          <th style="text-align: center;">Descripcion</th>
+          <th style="text-align: center">N°</th>
+          <th style="text-align: center">Descripcion</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="text-align:center;" *ngFor="let item of datosTid">
-          <td style="margin-top: 3%;">{{item.idt}}</td>
-          <td style="margin-top: 3%;">{{item.nombret}}</td>
+        <tr style="text-align: center" *ngFor="let item of datosTid">
+          <td style="margin-top: 3%">{{ item.idt }}</td>
+          <td style="margin-top: 3%">{{ item.nombret }}</td>
         </tr>
       </tbody>
     </table>

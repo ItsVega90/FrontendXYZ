@@ -18,8 +18,10 @@
 </nav>
 
 <div class="container-fluid p-3">
-  <div class="container-fluid p-3 my-2 bg-dark text-white"
-    style="display: flex; justify-content: center; align-items: center;">
+  <div
+    class="container-fluid p-3 my-2 bg-dark text-white"
+    style="display: flex; justify-content: center; align-items: center"
+  >
     <h3 id="titulo">Lista de especies</h3>
   </div>
 </div>
@@ -28,14 +30,14 @@
     <table class="table table-dark table-striped">
       <thead>
         <tr>
-          <th style="text-align: center;">N°</th>
-          <th style="text-align: center;">NombreDeEspecie</th>
+          <th style="text-align: center">N°</th>
+          <th style="text-align: center">NombreDeEspecie</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="text-align:center;" *ngFor="let item of datosEsp">
-          <td style="margin-top: 3%;">{{item.ide}}</td>
-          <td style="margin-top: 3%;">{{item.nombree}}</td>
+        <tr style="text-align: center" *ngFor="let item of datosEsp">
+          <td style="margin-top: 3%">{{ item.ide }}</td>
+          <td style="margin-top: 3%">{{ item.nombree }}</td>
         </tr>
       </tbody>
     </table>

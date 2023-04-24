@@ -8,9 +8,8 @@ describe('TipoidComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TipoidComponent ]
-    })
-    .compileComponents();
+      declarations: [TipoidComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
