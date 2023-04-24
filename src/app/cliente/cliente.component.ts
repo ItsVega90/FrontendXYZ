@@ -54,6 +54,10 @@ export class ClienteComponent implements OnInit {
     );
   }
 
+  open() {
+    this.formCli.reset();
+  }
+
   saveCli() {
     this.serviceCli.saveCliente(this.formCli.value).subscribe(
       (resp) => {

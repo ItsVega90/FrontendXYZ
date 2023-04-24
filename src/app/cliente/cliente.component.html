@@ -31,6 +31,7 @@
     class="btn btn-outline-dark my-2 btn-md float-end"
     data-bs-toggle="modal"
     data-bs-target="#myModal"
+    (click)="open()"
   >
     Ingresar cliente
   </button>
@@ -195,6 +196,7 @@
           type="submit"
           class="btn btn-outline-danger btn-sm"
           data-bs-dismiss="modal"
+          (click)="refresh()"
         >
           Cancelar
         </button>
@@ -317,6 +319,7 @@
           type="submit"
           class="btn btn-outline-danger btn-sm"
           data-bs-dismiss="modal"
+          (click)="refresh()"
         >
           Cancelar
         </button>

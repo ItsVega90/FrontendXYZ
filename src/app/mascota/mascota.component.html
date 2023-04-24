@@ -31,6 +31,7 @@
     class="btn btn-outline-dark my-2 btn-md float-end"
     data-bs-toggle="modal"
     data-bs-target="#myModal"
+    (click)="open()"
   >
     Ingresar paciente
   </button>
@@ -100,6 +101,13 @@
       </tbody>
     </table>
   </div>
+  <button
+    type="button"
+    class="btn btn-outline-dark my-2 btn-md float-end"
+    (click)="exportAsXLSX()"
+  >
+    Exportar excel
+  </button>
 </div>
 
 <!--Inicio del SuperModal-->
@@ -205,6 +213,7 @@
           type="submit"
           class="btn btn-outline-danger btn-sm"
           data-bs-dismiss="modal"
+          (click)="refresh()"
         >
           Cancelar
         </button>
@@ -320,6 +329,7 @@
           type="submit"
           class="btn btn-outline-danger btn-sm"
           data-bs-dismiss="modal"
+          (click)="refresh()"
         >
           Cancelar
         </button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { MascotaService } from '../service/mascota.service';
 import { MascotaInterface } from '../interface/mascota.interface';
@@ -10,6 +10,8 @@ import { ClienteInterface } from '../interface/cliente.interface';
 import { ClienteService } from '../service/cliente.service';
 import { EspecieInterface } from '../interface/especie.interface';
 import { EspecieService } from '../service/especie.service';
+
+import { ExportService } from '../service/export.service';
 
 @Component({
   selector: 'app-mascota',
@@ -43,7 +45,8 @@ export class MascotaComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private serviceCli: ClienteService,
-    private serviceEsp: EspecieService
+    private serviceEsp: EspecieService,
+    private exportService: ExportService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +63,10 @@ export class MascotaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  open() {
+    this.formMas.reset();
   }
 
   saveMas() {
@@ -141,5 +148,9 @@ export class MascotaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  exportAsXLSX() {
+    this.exportService.exportToExcel(this.datosMas, 'veterinariaExcel');
   }
 }
